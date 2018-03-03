@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head> 
-  <link rel="icon" href="https://png.icons8.com/ios/1600/jukebox.png">
+  <link rel="icon" src="/static/jukebox_small.png">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
   <title>Jukebox Go</title> 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8Xw4am6lpo7dD0nGqsBIgMSa1thkGSDg"></script>
@@ -46,6 +46,8 @@
   <input type="button" onclick="vote()" value="Submit">
 </form>
 
+<br>
+
 <div id="map" style="width: 100%; height: 1000px;"></div>
 <!--   <p id="address"></p>-->
   <p id="error"></p>
@@ -56,7 +58,7 @@
 
 <div id="bot_banner"> 
   <div id='word_block'>
-    <div id='text'>Current Song: </div>
+    <div id='text'><strong>Current Song: </strong></div>
     <div id='song_title'></div>
 
     <div data-video="my_id"

@@ -42,14 +42,13 @@
 
 
       map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 17,
+        zoom: 250,
         center: userLatLng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
       var infowindow = new google.maps.InfoWindow();
 
 
-      var marker;
       for (var key in jukeBoxDict) {
         var jukeBoxName = key;
         var locationX;
@@ -64,7 +63,11 @@
                 song = jukeBoxDict[key][key2];
               }
           }
-          marker = new google.maps.Marker({position: new google.maps.LatLng(locationX, locationY), map: map});
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locationX, locationY), 
+            map: map,
+            icon: "/static/jukebox_small.png"
+          });
           google.maps.event.addListener(marker, 'click', (function(marker) {
             return function() {
               infowindow.setContent(jukeBoxName + "<br>" + "Song: " + song);
@@ -73,10 +76,11 @@
           })(marker));
     }
 
-
-    new google.maps.Marker({
+    var iconBase = "../img/jukebox_small.png";
+    var marker = new google.maps.Marker({
           map: map,
-          position: userLatLng
+          position: userLatLng,
+          icon: iconBase + "../img/jukebox_small.png"
         });
         // Draw a circle around the user position to have an idea of the current localization accuracy
         var circle = new google.maps.Circle({
