@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!-- <script type="text/javascript" src="jquery-1.8.3.js"></script> -->
+</head>
+<body><h1 id="head">Hello</h1></body>
+</html>
+<script type="text/javascript">
+   document.getElementById("head").innerHTML="newtext";
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='firebase_interface.js') }}"></script>
+<script>
+    songData('box1', iter);
+</script>
