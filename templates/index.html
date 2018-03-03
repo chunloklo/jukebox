@@ -3,10 +3,23 @@
 <body>
 
 <!-- <script type="text/javascript" src="{{ url_for('static', filename='player.js') }}"></script> -->
+<style>
+  #map {
+    width : 100%;
+    height : 50%;
+  }
+  #bot_banner {
+    width : 100%;
+    height : 50px;
+    background-color :  #F5F5DC;
+  }
+  #word_block {
+    text-align: center;
+  }
+</style>
 
-
-<div id='song_title'>Current Song:</div>
-
+<!-- <div id='song_title'>Current Song:</div>
+ -->
 <div data-video="my_id"
          data-autoplay="1"
          data-loop="0"
@@ -39,15 +52,25 @@
 <html> 
 <head> 
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
-  <title>Google Maps Multiple Markers</title> 
+  <title>DJ Me Now</title> 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8Xw4am6lpo7dD0nGqsBIgMSa1thkGSDg"></script>
 </head> 
 <body>
-  <div id="map" style="width: 1000px; height: 1000px;"></div>
-  <p id="address"></p>
+  <div id="map" style="width: 100%; height: 1000px;"></div>
+<!--   <p id="address"></p>-->
   <p id="error"></p>
   <p id="jukeBoxDistances"></p>
   <script type="text/javascript" src="/static/mapFunctions.js"></script>
+
+
+
+<div id="bot_banner"> 
+  <div id='word_block'>
+    <div id='text'>Current Song: </div>
+    <div id='song_title'></div>
+  </div>
+</div>
+
 
 
 </body>
@@ -64,6 +87,7 @@
 
 
 <script>
+getBoxes(calculateJukebox);
 
 var cur_box = "box1";
 

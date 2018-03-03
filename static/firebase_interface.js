@@ -75,7 +75,7 @@ function getBoxes(func) {
         // console.log(snapshot.val());
         func(snapshot.val());
     });
-
+    console.log("running getBoxes()");
 }
 
 var text = 'iter'
