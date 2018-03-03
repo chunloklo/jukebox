@@ -95,7 +95,7 @@
         map.fitBounds(circle.getBounds());        
 
         ////////////////// Multiple Marker Code ///////////////////
-       // calculateJukebox();
+       calculateJukebox();
       }
       /////////////////
 
