@@ -1,6 +1,135 @@
+<!DOCTYPE html>
 <html>
-<header><title>This is title</title></header>
 <body>
-Hello world
+
+<!-- <script type="text/javascript" src="{{ url_for('static', filename='player.js') }}"></script> -->
+
+
+<div>Current Song:</div>
+
+<div data-video="my_id"  
+         data-autoplay="1"         
+         data-loop="0"             
+         id="youtube-audio">
+  </div>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://cdn.rawgit.com/labnol/files/master/yt.js"></script>
+
+<h1>Vote For Your Favorite Song!</h1>
+
+<form id="youtube_link"> Enter a YouTube link: <input id="input" type="text" link="songlink"><br>
+
+<br>
+  <input type="button" onclick="submit_link()" value="Submit">
+</form>
+
+<!-- <p id="demo"></p> -->
+
+<script>
+
+function submit_link() {
+    var link = document.getElementById("input").value;
+    // document.getElementById("demo").innerHTML = link;
+}
+
+// takes in a list of 10 songs and shuffles
+function play_playlist(playlist) {
+	// var playlist = [
+	// 	{ name: 'gods plan', id: 'xpVfcZ0ZcFM' },
+	// 	{ name: 'perfect', id: '2Vv-BfVoq4g' },
+	// 	{ name: 'finesse', id: 'LsoLEjrDogU' },
+	// 	{ name: 'havana', id: 'HCjNJDNzw8Y' },
+	// 	{ name: 'look alive', id: 'NV-3s2wwC8c'},
+	// 	{ name: 'rockstar', id: 'UceaB4D0jpo' },
+	// 	{ name: 'all the stars', id: 'GfCqMv--ncA' },
+	// 	{ name: 'meant to be', id: 'zDo0H8Fm7d0' },
+	// 	{ name: 'pray for me', id: 'K5xERXE7pxI' },
+	// 	{ name: 'stir fry', id: 'RHUxyXZBXY8' }
+	// ];
+
+	var playlist = [
+		{ name: 'hu waa waa', id: 'FAd2_gdkg-8' },
+		{ name: 'really n', id: 'rfsqEO-WQHc' },
+		{ name: 'nope', id: '3Y7aWLpuxA4' },
+		{ name: 'horn', id: '_asNhzXq72w' },
+		{ name: 'name is', id: '2D-ZO2rGcSA'},
+		{ name: 'leeroy', id: 'yOMj7WttkOA' },
+		{ name: 'gta', id: 'K3kFQHKE0LA' },
+		{ name: 'suspense', id: 'QEjxSLTe5_M' },
+		{ name: 'tadaah', id: 'jLtbFWJm9_M' },
+		{ name: 'shut up', id: 'AqcyQItOL9g' }
+	];
+	var current_song = Math.floor(Math.random() * 10);
+	console.log(current_song);
+	var current_id = playlist[current_song].id;
+	console.log(current_id);
+	play_current_song(current_id);
+	player.loadVideoById(current_id)
+}
+
+function play_current_song(song_id) {
+	// song_id = 'UceaB4D0jpo';
+	document.getElementById("youtube-audio").setAttribute('data-video', song_id);
+}
+
+play_playlist('test');
+// play_current_song('test');
+
+var player;
+
+  function onYouTubeIframeAPIReady() {
+
+    var ctrlq = document.getElementById("youtube-audio");
+    ctrlq.innerHTML = '<img id="youtube-icon" src=""/><div id="youtube-player"></div>';
+    ctrlq.style.cssText = 'width:150px;margin:2em auto;cursor:pointer;cursor:hand;display:none';
+    ctrlq.onclick = toggleAudio;
+    
+    player = new YT.Player('youtube-player', {
+      height: '0',
+      width: '0',
+      videoId: ctrlq.dataset.video,
+      playerVars: {
+        autoplay: ctrlq.dataset.autoplay,
+        loop: ctrlq.dataset.loop,
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+
+  function togglePlayButton(play) {
+    document.getElementById("youtube-icon").src = play ? "https://i.imgur.com/IDzX9gL.png" : "https://i.imgur.com/quyUPXN.png";
+  }
+
+  function toggleAudio() {
+    if (player.getPlayerState() == 1 || player.getPlayerState() == 3) {
+      player.pauseVideo();
+      togglePlayButton(false);
+    } else {
+      player.playVideo();
+      togglePlayButton(true);
+    }
+  }
+
+  function onPlayerReady(event) {
+    //event.target.setVolume(100);
+    player.setPlaybackQuality("small"); //highres, hd1080, hd720, large, medium, small
+    document.getElementById("youtube-audio").style.display = "block";
+    togglePlayButton(player.getPlayerState() !== 5);
+  }
+
+  function onPlayerStateChange(event) {
+    if (event.data === 0) {
+    	play_playlist('test');
+    	player.setPlaybackQuality("small");
+    	toggleAudio();
+
+    }
+  }
+
+</script>
+
 </body>
 </html>
