@@ -39,6 +39,12 @@ function updateSong(id, name, vid_id, vote) {
 
 }
 
+function fbchangeTitle(id, name, vid_id) {
+    database.ref('/jukebox/' + id +'/' + vid_id + '/' + 'name').set(name);
+}
+
+// function updateName(id, vid)
+
 function voteSong(id, vid_id) {
     var ref = database.ref('/jukebox/' + id +'/' + vid_id + '/vote');
 
@@ -46,6 +52,20 @@ function voteSong(id, vid_id) {
         return (vote || 0) + 1;
     });
 }
+
+function voteSongName(id, name) {
+    var ref = database.ref('/jukebox/' + id +'/').orderByChild('name').equalTo(name);
+    ref.once('value', function(snapshot) {
+        ref = database.ref('/jukebox/' + id +'/' + Object.keys(snapshot.val())[0] + '/vote')
+
+        ref.transaction(function(vote) {
+            return (vote || 0) + 1;
+        });
+    });
+
+
+}
+
 
 // voteSong("box1", '5hxibHJOE5E')
 
@@ -67,18 +87,31 @@ function iter(dict) {
     }
 }
 
-function songData(id, func) {
-    var ref = database.ref('/jukebox/' + id).orderByChild('vote').limitToLast(2);
-    ref.on('value', function(snapshot) {
-        var songList = [];
-        snapshot.forEach(function(child) {
-           songList.push(child.val());
+function songData(id, func, once=false) {
+    var ref = database.ref('/jukebox/' + id).orderByChild('vote');
+    // if (once) {
+    //     ref.once('value', function(snapshot) {
+    //         var songList = [];
+    //         snapshot.forEach(function(child) {
+    //            songList.push(child.val());
+    //         });
+    //         songList.reverse()
+    //         console.log(songList);
+    //         func(songList);
+    //         // // colsone.log(snapshot.val());
+    //     });
+    // } else {
+        ref.on('value', function(snapshot) {
+            var songList = [];
+            snapshot.forEach(function(child) {
+               songList.push(child.val());
+            });
+            songList.reverse()
+            console.log(songList);
+            func(songList);
+            // // colsone.log(snapshot.val());
         });
-        songList.reverse()
-        console.log(songList);
-        func(songList);
-        // // colsone.log(snapshot.val());
-    });
+    // }
 }
 
 // songData('box1', iter);
