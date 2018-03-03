@@ -4,6 +4,10 @@
 <!-- <script type="text/javascript" src="jquery-1.8.3.js"></script> -->
 </head>
 <body><h1 id="head">Hello</h1></body>
+
+<form id="yt_link"> Enter a YouTube link: <input id='input' type='text' link='songlink'>
+<input type="button" onclick="parseYTLink()" value="Submit">
+
 </html>
 <script type="text/javascript">
    document.getElementById("head").innerHTML="newtext";
@@ -13,6 +17,39 @@
 <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='firebase_interface.js') }}"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='jquery-3.3.1.min.js') }}"></script>
+
+<!-- <script src=""></script> -->
 <script>
-    songData('box1', iter);
+    ytApiKey = 'AIzaSyDPiXtTySH7HpuVQxD_UvP1TWgGqpcGjuA'
+    // itemId = 'GtJEC2ECB1I'
+
+    function parseYTLink(link) {
+        link = document.getElementById('input').value
+        var vid = link.split('=')[1];
+        q = 'https://www.googleapis.com/youtube/v3/videos?id='+ vid +'&key='+ ytApiKey +'&fields=items(snippet(channelId,title,categoryId))&part=snippet' ;
+        console.log(vid);
+        getTitle(updateTitle, vid);
+        // return split
+    }
+    // songData('box1', iter);
+
+    function getTitle(func, id) {
+         $.ajax({
+      url: q,
+      dataType: "jsonp",
+      success: function(data){
+            func(data.items[0].snippet.title)
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert (textStatus, + ' | ' + errorThrown);
+        }
+      });
+     }
+
+     function updateTitle(str) {
+        document.getElementById("head").innerHTML=str;
+     }
+
 </script>
