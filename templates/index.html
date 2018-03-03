@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html>
+<head> 
+  <link rel="icon" href="https://png.icons8.com/ios/1600/jukebox.png">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <title>Jukebox Go</title> 
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8Xw4am6lpo7dD0nGqsBIgMSa1thkGSDg"></script>
+</head> 
 <body>
 
 <!-- <script type="text/javascript" src="{{ url_for('static', filename='player.js') }}"></script> -->
@@ -10,7 +16,7 @@
   }
   #bot_banner {
     width : 100%;
-    height : 50px;
+    height : 100px;
     background-color :  #F5F5DC;
   }
   #word_block {
@@ -20,13 +26,6 @@
 
 <!-- <div id='song_title'>Current Song:</div>
  -->
-<div data-video="my_id"
-         data-autoplay="1"
-         data-loop="0"
-         id="youtube-audio">
-  </div>
-  <script src="https://www.youtube.com/iframe_api"></script>
-  <script src="https://cdn.rawgit.com/labnol/files/master/yt.js"></script>
 
 <h1>Add Your Favorite Song!</h1>
 
@@ -47,16 +46,7 @@
   <input type="button" onclick="vote()" value="Submit">
 </form>
 
-<!-- MAP -->
-<!DOCTYPE html>
-<html> 
-<head> 
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
-  <title>DJ Me Now</title> 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8Xw4am6lpo7dD0nGqsBIgMSa1thkGSDg"></script>
-</head> 
-<body>
-  <div id="map" style="width: 100%; height: 1000px;"></div>
+<div id="map" style="width: 100%; height: 1000px;"></div>
 <!--   <p id="address"></p>-->
   <p id="error"></p>
   <p id="jukeBoxDistances"></p>
@@ -68,13 +58,16 @@
   <div id='word_block'>
     <div id='text'>Current Song: </div>
     <div id='song_title'></div>
+
+    <div data-video="my_id"
+             data-autoplay="1"
+             data-loop="0"
+             id="youtube-audio">
+      </div>
+      <script src="https://www.youtube.com/iframe_api"></script>
+      <script src="https://cdn.rawgit.com/labnol/files/master/yt.js"></script>
   </div>
 </div>
-
-
-
-</body>
-</html>
 
 
 <!-- <p id="demo"></p> -->
@@ -84,7 +77,6 @@
 <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='firebase_interface.js') }}"></script>
-
 
 <script>
 getBoxes(calculateJukebox);
@@ -179,7 +171,7 @@ var player;
   function onYouTubeIframeAPIReady() {
 
     var ctrlq = document.getElementById("youtube-audio");
-    ctrlq.innerHTML = '<img id="youtube-icon" src=""/><div id="youtube-player"></div>';
+    ctrlq.innerHTML = '<img id="youtube-icon" src="" height=20px width=20px/><div id="youtube-player"></div>';
     ctrlq.style.cssText = 'width:150px;margin:2em auto;cursor:pointer;cursor:hand;display:none';
     ctrlq.onclick = toggleAudio;
 
